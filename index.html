@@ -700,7 +700,7 @@
                     <form id="submit-form" action="" class="contact__form grid">
                         <div class="contact__inputs grid">
                             <div class="contact__content">
-                                <label for="name" class="contact__label">Name</label>
+                                <label for="name" class="contact__label">Your name</label>
                                 <input type="text" class="contact__input" name="name">
                             </div>
                             <div class="contact__content">
@@ -778,7 +778,7 @@
         <!--==================== MAIN JS ====================-->
         <script src="assets/js/main.js"></script>
 
-        <!--==================== Form Validation ====================-->
+        <!--==================== Form Submission ====================-->
         <script>
             $("#submit-form").submit((e)=>{
                 e.preventDefault()
@@ -795,6 +795,32 @@
                         alert("Something Error")
         
                     }
+                })
+            })
+        </script>
+        <!--==================== jQuery ====================-->
+        <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" 
+        integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" 
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+         <!--==================== Form validation ====================-->
+        <script>
+            $(document).ready(function(){
+                $('#submit-form').validate({
+                    rules:{
+                        name:{
+                            required:true,
+                            minlength: 4
+                        },
+                        email:{
+                            required: true,
+                            email: true
+                        },
+                        project:{
+                            required:true
+                        }
+                    }
+        
                 })
             })
         </script>
