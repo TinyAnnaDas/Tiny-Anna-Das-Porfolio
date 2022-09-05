@@ -13,8 +13,7 @@
         <!--==================== CSS ==========-->
         <link rel="stylesheet" href="assets/css/styles.css">
 
-        <!--==================== FORM VALIDATION AJAX====================-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ 
 
         <!--==================== TITLE ICON ====================-->
         <link rel="icon" href="https://media.istockphoto.com/photos/letter-t-capital-alphabet-letter-red-font-3d-rendering-illustration-picture-id1185452795" type="image/gif" sizes="16x16">
@@ -697,20 +696,29 @@
                         </div>
                     </div>
 
-                    <form id="submit-form" action="" class="contact__form grid">
+                    <form id="submit-form"  class="contact__form grid">
                         <div class="contact__inputs grid">
-                            <div class="contact__content">
+                            <div class="input-control contact__content">
                                 <label for="name" class="contact__label">Your name</label>
-                                <input type="text" class="contact__input" name="name">
+                                <input id="fname" name="name" type="text" class="contact__input" required>
+                                <div class="error">
+
+                                </div>
                             </div>
-                            <div class="contact__content">
+                            <div class="input-control contact__content">
                                 <label for="mail" class="contact__label">Email</label>
-                                <input type="email" class="contact__input" name="email">
+                                <input id="email" name="email" type="text" class="contact__input" required>
+                                <div class="error">
+
+                                </div>
                             </div>
                         </div>
-                        <div class="contact__content">
+                        <div class="input-control contact__content">
                             <label for="project" class="contact__label">Project</label>
-                            <input type="text" class="contact__input" name="project">
+                            <input id="project" name="project" type="text" class="contact__input" required>
+                            <div class="error">
+
+                            </div>
                         </div>
                         <div class="contact__content">
                             <label for="message" class="contact__label">Message</label>
@@ -778,6 +786,11 @@
         <!--==================== MAIN JS ====================-->
         <script src="assets/js/main.js"></script>
 
+        <script src="/assets/js/form.js"></script>
+
+       <!--==================== FORM submission AJAX====================-->
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
         <!--==================== Form Submission ====================-->
         <script>
             $("#submit-form").submit((e)=>{
@@ -798,31 +811,7 @@
                 })
             })
         </script>
-        <!--==================== jQuery ====================-->
-        <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" 
-        integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" 
-        crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
-         <!--==================== Form validation ====================-->
-        <script>
-            $(document).ready(function(){
-                $('#submit-form').validate({
-                    rules:{
-                        name:{
-                            required:true,
-                            minlength: 4
-                        },
-                        email:{
-                            required: true,
-                            email: true
-                        },
-                        project:{
-                            required:true
-                        }
-                    }
-        
-                })
-            })
-        </script>
+
+
     </body>
 </html>
