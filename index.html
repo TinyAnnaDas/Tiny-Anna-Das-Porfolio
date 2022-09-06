@@ -696,29 +696,23 @@
                         </div>
                     </div>
 
-                    <form id="submit-form"  class="contact__form grid">
+                    <form id="submit-form" name="google-sheet" role="form"  class="contact__form grid">
                         <div class="contact__inputs grid">
-                            <div class="input-control contact__content">
+                            <div class="contact__content">
                                 <label for="name" class="contact__label">Your name</label>
-                                <input id="fname" name="name" type="text" class="contact__input" required>
-                                <div class="error">
-
-                                </div>
+                                <input id="contact-name" name="name" type="text" class="contact__input" onkeyup=" validateName()">
+                                <span id="name-error"></span>
                             </div>
-                            <div class="input-control contact__content">
+                            <div class="contact__content">
                                 <label for="mail" class="contact__label">Email</label>
-                                <input id="email" name="email" type="text" class="contact__input" required>
-                                <div class="error">
-
-                                </div>
+                                <input id="contact-email" name="email" type="text" class="contact__input" onkeyup="validateEmail()">
+                                <span id="email-error"></span>
                             </div>
                         </div>
-                        <div class="input-control contact__content">
+                        <div class="contact__content">
                             <label for="project" class="contact__label">Project</label>
-                            <input id="project" name="project" type="text" class="contact__input" required>
-                            <div class="error">
-
-                            </div>
+                            <input id="project" name="project" type="text" class="contact__input" >
+                            
                         </div>
                         <div class="contact__content">
                             <label for="message" class="contact__label">Message</label>
@@ -730,6 +724,7 @@
                                 Send Message
                                 <i class="uil uil-message button__icon"></i>
                             </button>
+                            <span id="submit-error" ></span>
                         </div>
                     </form>
                 </div>
@@ -793,23 +788,25 @@
 
         <!--==================== Form Submission ====================-->
         <script>
-            $("#submit-form").submit((e)=>{
-                e.preventDefault()
-                $.ajax({
-                    url:"https://script.google.com/macros/s/AKfycbzajWeQfq2p8EdNzMEPzqvRikWvkkDUb4riQlo0y5t8EPCfnqs0vpvQnBOYM6LnMZdM/exec",
-                    data:$("#submit-form").serialize(),
-                    method:"post",
-                    success:function (response){
-                        alert("Form submitted successfully")
-                        window.location.reload()
-                        //window.location.href="https://google.com"
-                    },
-                    error:function (err){
-                        alert("Something Error")
-        
-                    }
-                })
-            })
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzajWeQfq2p8EdNzMEPzqvRikWvkkDUb4riQlo0y5t8EPCfnqs0vpvQnBOYM6LnMZdM/exec'
+        const form = document.forms['google-sheet']   
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            if(validateName() && validateEmail()){
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response =>alert('Success!',response))
+                .catch(error => console.error('Error!', error.message))
+                document.getElementById("submit-form").reset();
+            }else{
+
+                var error=document.getElementById('submit-error')
+                error.innerHTML='Fill all fields'
+                error.style.color='red'
+                setTimeout(function(){
+                error.innerHTML=''
+                },3000);
+            } 
+        })
         </script>
 
 
